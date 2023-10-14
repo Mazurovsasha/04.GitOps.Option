@@ -17,7 +17,7 @@
 
 
 from flask import Flask, render_template, request
-from flask_frozen import Freezer
+from frozen_flask import Freezer
 
 app = Flask(__name__)
 freezer = Freezer(app)
