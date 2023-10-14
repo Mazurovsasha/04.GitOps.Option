@@ -58,17 +58,26 @@ jobs:
         with:
           python-version: '3.x'
 
+      - name: Install myenv
+        run: |
+          pip install virtualenv
+          virtualenv myenv
+          source myenv/bin/activate
+
       - name: Install dependencies
         run: pip install -r requirements.txt
+        
+      - name: Create Directory
+        run: mkdir ./static
+
+      - name: Create Directory
+        run: mkdir ./build
 
       - name: Build project
         run: |
           pip install Flask
           pip install Frozen-Flask
           flask freeze
-
-      - name: Create Directory
-        run: mkdir ./static
 
       - name: Move static files
         run: |
