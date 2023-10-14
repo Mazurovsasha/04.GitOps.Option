@@ -1,3 +1,44 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - gh-pages
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Build and Deploy
+        run: |
+          mkdir public
+          cp *.html public/
+          echo 'Hello from GitHub Actions' > public/index.html
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # name: Build and Deploy to GitHub Pages
 
 # on:
@@ -38,53 +79,56 @@
 #           publish_dir: ./static
 
 
-name: Build and Deploy to GitHub Pages
+# name: Build and Deploy to GitHub Pages
 
-on:
-  push:
-    branches:
-      - main
+# on:
+#   push:
+#     branches:
+#       - main
 
-jobs:
-  build-and-deploy:
-    runs-on: ubuntu-latest
+# jobs:
+#   build-and-deploy:
+#     runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
+#     steps:
+#       - name: Checkout repository
+#         uses: actions/checkout@v2
 
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.x'
+#       - name: Set up Python
+#         uses: actions/setup-python@v2
+#         with:
+#           python-version: '3.x'
 
-      - name: Install myenv
-        run: |
-          pip install virtualenv
-          virtualenv myenv
-          source myenv/bin/activate
+#       - name: Install myenv
+#         run: |
+#           pip install virtualenv
+#           virtualenv myenv
+#           source myenv/bin/activate
 
-      - name: Install dependencies
-        run: pip install -r requirements.txt
+#       - name: Install dependencies
+#         run: pip install -r requirements.txt
         
-      - name: Create Directory
-        run: mkdir ./static
+#       - name: Create Directory
+#         run: mkdir ./static
 
-      - name: Create Directory
-        run: mkdir ./build
+#       - name: Create Directory
+#         run: mkdir ./build
 
-      - name: Build project
-        run: |
-          pip install Flask
-          pip install Frozen-Flask
-          flask freeze
+#       - name: Build project
+#         run: |
+#           pip install Flask
+#           pip install Frozen-Flask
+#           flask freeze
 
-      - name: Move static files
-        run: |
-         cp -R build ./static
+#       - name: Move static files
+#         run: |
+#          cp -R build ./static
 
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GP_TOKEN }}
-          publish_dir: ./templates
+#       - name: Deploy to GitHub Pages
+#         uses: peaceiris/actions-gh-pages@v3
+#         with:
+#           github_token: ${{ secrets.GP_TOKEN }}
+#           publish_dir: ./templates
+
+
+
